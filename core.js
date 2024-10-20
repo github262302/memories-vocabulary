@@ -24,11 +24,13 @@ async function sleep(time) {
   });
 }
 async function main(list = ["default"]) {
+  const url = `https://www.youdao.com/result?word=abanden&lang=en`;
+  const iframe = createIframeDom(url);
+  appendToDom(iframe, target);
   while (true) {
     const word = list[0];
-    const url = `https://www.youdao.com/result?word=${word}&lang=en`;
-    const iframe = createIframeDom(url);
-    appendToDom(iframe, target);
+    const new_url = `https://www.youdao.com/result?word=${word}&lang=en`;
+    iframe.setAttribute("src", new_url);
     const first = list.shift();
     list.push(first);
     await sleep(10000);
