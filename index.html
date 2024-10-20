@@ -9,11 +9,12 @@
 </head>
 
 <body>
-    <h1>EF Vocabulary Common 1000 words</h1>
+    <h1 id="title">Vocabulary Common 1000 words</h1>
     <div class="container">
         <div>
             <a href="./index.html">EF Common 1000 words</a>
-            <a href="./b1200.html">B1 200 words</a>
+            <a href="./index.html?theme=b1_1000">B1 1000 words</a>
+            <a href="./index.html?theme=game_100">Game 100 words</a>
         </div>
         <div id="app"></div>
     </div>
@@ -21,7 +22,34 @@
 <style>
 
 </style>
-<script src="./level_common.js" type="module"></script>
+<script type="module">
+    import { main, randomSort } from "./core.js";
+    // 
+    import listb1100 from "./b1_200.js";
+    import common1000 from "./common.js";
+    import game100 from "./words_game_100.js";
+    // 
+    function setTitle(title) {
+        window.document.title = title;
+        document.querySelector("#title").innerHTML = title;
+    }
+    // 
+    const search = new URLSearchParams(window.location.search)
+    const theme = search.get("theme");
+    // 
+
+    if (theme == 'b1_1000') {
+        main(randomSort(listb1100));
+        setTitle("B1 1000 words")
+    } else if (theme == 'game_100') {
+        main(randomSort(game100));
+        setTitle("Game 100 words")
+    } else {
+        main(randomSort(common1000));
+        setTitle("EF Common 1000 words")
+    }
+
+</script>
 <link rel="stylesheet" href="./index.css">
 
 </html>
