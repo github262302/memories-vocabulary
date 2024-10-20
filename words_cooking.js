@@ -1,0 +1,2 @@
+const s = ["Chop", "Slice", "Dice", "Stir", "Boil", "Simmer", "Fry", "Grill", "Bake", "Roast", "Sauté", "Steam", "Whisk", "Mix", "Blend", "Season", "Marinate", "Peel", "Grate", "Squeeze", "Knead", "Roll", "Pinch", "Measure", "Pour", "Heat", "Toast", "Garnish", "Serve", "Taste"]
+export default s;

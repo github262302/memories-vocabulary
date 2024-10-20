@@ -15,6 +15,9 @@
             <a href="./index.html">EF Common 1000 words</a>
             <a href="./index.html?theme=b1_1000">B1 1000 words</a>
             <a href="./index.html?theme=game_100">Game 100 words</a>
+            <a href="./index.html?theme=building">Building</a>
+            <a href="./index.html?theme=cooking">Cooking</a>
+            <a href="./index.html?theme=TheEscapists2">The Escapists 2</a>
         </div>
         <div id="app"></div>
     </div>
@@ -28,6 +31,9 @@
     import listb1100 from "./b1_200.js";
     import common1000 from "./common.js";
     import game100 from "./words_game_100.js";
+    import TheEscapists2 from "./TheEscapists2.js";
+    import words_building from "./words_building.js";
+    import words_cooking from "./words_cooking.js";
     // 
     function setTitle(title) {
         window.document.title = title;
@@ -44,6 +50,15 @@
     } else if (theme == 'game_100') {
         main(randomSort(game100));
         setTitle("Game 100 words")
+    } else if (theme == 'TheEscapists2') {
+        main(randomSort(TheEscapists2));
+        setTitle("The Escapists 2")
+    } else if (theme == 'building') {
+        main(randomSort(words_building));
+        setTitle("Building")
+    } else if (theme == 'cooking') {
+        main(randomSort(words_cooking));
+        setTitle("Cooking")
     } else {
         main(randomSort(common1000));
         setTitle("EF Common 1000 words")
