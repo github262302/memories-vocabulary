@@ -4,21 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EF Vocabulary Common 1000 words</title>
-
+    <title></title>
 </head>
 
 <body>
-    <h1 id="title">Vocabulary Common 1000 words</h1>
+    <div id="title" class="title">words</div>
     <div class="container">
-        <div>
-            <a href="./index.html">EF Common 1000 words</a>
-            <a href="./index.html?theme=b1_1000">B1 1000 words</a>
-            <a href="./index.html?theme=game_100">Game 100 words</a>
-            <a href="./index.html?theme=building">Building</a>
-            <a href="./index.html?theme=cooking">Cooking</a>
-            <a href="./index.html?theme=TheEscapists2">The Escapists 2</a>
-        </div>
+        <div class="topics"></div>
         <div id="app"></div>
     </div>
 </body>
@@ -29,11 +21,32 @@
     import { main, randomSort } from "./core.js";
     // 
     import listb1100 from "./b1_200.js";
-    import common1000 from "./common.js";
+    import common1000 from "./ef_1000_common.js";
     import game100 from "./words_game_100.js";
     import TheEscapists2 from "./TheEscapists2.js";
     import words_building from "./words_building.js";
     import words_cooking from "./words_cooking.js";
+    import words_walk from "./words_walk.js";
+    import words_office from "./words_office.js";
+    import words_emotion from "./words_emotion.js";
+    import words_musicstyle from "./words_music-style.js";
+    import words_restroom from "./words_restroom.js";
+    import words_verb from "./words_verb.js";
+    const topics = [
+        { name: "Verb", list: words_verb },
+        { name: "EF-Common-1000-words", list: common1000 },
+        { name: "B1-1000-words", list: listb1100 },
+        { name: "Game-100-words", list: game100 },
+        { name: "Building", list: words_building },
+        { name: "Restroom", list: words_restroom },
+        { name: "Cooking", list: words_cooking },
+        { name: "Walk", list: words_walk },
+        { name: "Office", list: words_office },
+        { name: "Emotion", list: words_emotion },
+        { name: "Music-Style", list: words_musicstyle },
+        { name: "The-Escapists-2", list: TheEscapists2 },
+
+    ]
     // 
     function setTitle(title) {
         window.document.title = title;
@@ -43,25 +56,38 @@
     const search = new URLSearchParams(window.location.search)
     const theme = search.get("theme");
     // 
-
-    if (theme == 'b1_1000') {
-        main(randomSort(listb1100));
-        setTitle("B1 1000 words")
-    } else if (theme == 'game_100') {
-        main(randomSort(game100));
-        setTitle("Game 100 words")
-    } else if (theme == 'TheEscapists2') {
-        main(randomSort(TheEscapists2));
-        setTitle("The Escapists 2")
-    } else if (theme == 'building') {
-        main(randomSort(words_building));
-        setTitle("Building")
-    } else if (theme == 'cooking') {
-        main(randomSort(words_cooking));
-        setTitle("Cooking")
+    function defaultMain() {
+        setTitle("EF Common 1000 words");
+        main(common1000);
+        highlightCurrentTopic("EF-Common-1000-words");
+    }
+    function createATag(topic) {
+        const a = document.createElement("a");
+        a.href = "./index.html?theme=" + topic.name;
+        a.innerHTML = topic.name;
+        a.setAttribute("name", topic.name);
+        return a;
+    }
+    function highlightCurrentTopic(name) {
+        const current = document.querySelector(`a[name="${name}"]`);
+        if (current) {
+            current.style.color = "red";
+        }
+    }
+    for (const topic of topics) {
+        document.querySelector(".topics").appendChild(createATag(topic));
+    }
+    if (theme) {
+        const topic = topics.find(t => t.name === theme);
+        if (topic) {
+            setTitle(topic.name);
+            main(randomSort(topic.list));
+            highlightCurrentTopic(topic.name);
+        } else {
+            defaultMain();
+        }
     } else {
-        main(randomSort(common1000));
-        setTitle("EF Common 1000 words")
+        defaultMain();
     }
 
 </script>
