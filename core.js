@@ -33,6 +33,7 @@ async function main(list = ["default"]) {
     iframe.setAttribute("src", new_url);
     const first = list.shift();
     list.push(first);
+    window.document.title = word;
     await sleep(10000);
   }
 }
