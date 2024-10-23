@@ -8,14 +8,42 @@
 </head>
 
 <body>
-    <div id="title" class="title">words</div>
     <div class="container">
-        <div class="topics"></div>
+        <div class="panel">
+            <div id="title" class="title">words</div>
+            <div class="topics"></div>
+        </div>
         <div id="app"></div>
     </div>
+    <input type="checkbox" class="checkboxHide">
 </body>
+<script>
+    const checkboxHide = document.querySelector(".checkboxHide");
+    const KEY_STOAGE = "checkboxHide";
+    checkboxHide.addEventListener("change", function () {
+        const panel = document.querySelector(".panel");
+        if (checkboxHide.checked) {
+            panel.style.display = "none";
+            window.localStorage.setItem(KEY_STOAGE, "true");
+        } else {
+            panel.style.display = "block";
+            window.localStorage.setItem(KEY_STOAGE, "false");
+        }
+    })
+    const hide = window.localStorage.getItem(KEY_STOAGE);
+    if (hide === "true") {
+        checkboxHide.checked = true;
+        const panel = document.querySelector(".panel");
+        panel.style.display = "none";
+    }
+</script>
 <style>
-
+    .checkboxHide {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        z-index: 1000;
+    }
 </style>
 <script type="module">
     import { main, randomSort } from "./core.js";
